@@ -2,7 +2,6 @@
 
 #include "Cell.hpp"
 #include "Ship.hpp"
-#include <vector>
 
 class Board{
     private:
@@ -23,11 +22,6 @@ class Board{
         void createIsles(int q);
         void _randPosition(int* pos);
         bool _positionIsValid(int posX, int posY);
-        void placeCarrier();
-        void placeCruiser();
-        void placeSubmarine();
-        void placeBattleship();
-        void placeDestroyer();
         void placeShips();
         void draw();
 };
