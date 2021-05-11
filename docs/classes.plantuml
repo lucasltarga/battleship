@@ -1,0 +1,141 @@
+@startuml Classes
+
+skinparam linetype polyline
+skinparam linetype ortho
+
+class Cell <<entity>>{
+    - visible : bool
+    - value : char
+
+    - posX : int
+    - posY : int
+    ..
+    + Cell()
+    + ~Cell()
+
+    + isVisible() : bool
+    + getValue() : char
+    + getPosX () : int
+    + getPosY () : int
+    + setVisible(visible : bool) : void
+    + setValue(value : char) : void
+    + setPos(posX : int, posY : int) : void
+    + draw() : void
+}
+
+class Board <<entity>>{
+    - board : std::vector<std::vector<Cell*>>
+    - ships : std::vector<Ship*>
+    - isles : std::vector<Cell*>
+    - size : int
+
+    + Board()
+    + ~Board()
+
+    + getBoard() : std::vector<std::vector<Cell*>>
+    + getSize() : int
+    + setBoard(board : std::vector<std::vector<Cell*>>) : void
+    + setSize(size : int) : void
+
+    + createIsles(q : int) : void
+    + _positionIsValid(posX : int, posY : int) : bool
+    + placeCarrier() : void
+    + placeCruiser() : void
+    + placeSubmarine() : void
+    + placeBattleship() : void
+    + placeDestroyer() : void
+    + placeShips() : void
+    + draw() : void
+}
+
+class Ship <<entity>>{
+    - size : int
+    - parts : std::vector<Cell*>
+    - type : char
+    - orientation : bool
+
+    + Ship()
+    + ~Ship()
+
+    + getSize() : int
+    + getParts() : std::vector<Cell*>
+    + getType() : char
+    + getOrientation() : bool
+    + setSize(size : int) : void
+    + setParts(parts : std::vector<Cell*>) : void
+    + setType(type : char) : void
+    + setOrientation(orientation : bool) : void
+}
+
+class Carrier <<entity>> extends Ship{
+    + Carrier()
+    + ~Carrier()
+}
+
+class Cruiser <<entity>> extends Ship{
+    + Cruiser()
+    + ~Cruiser()
+}
+
+class Submarine <<entity>> extends Ship{
+    + Submarine()
+    + ~Submarine()
+}
+
+class Battleship <<entity>> extends Ship{
+    + Battleship()
+    + ~Battleship()
+}
+
+class Destroyer <<entity>> extends Ship{
+    + Destroyer()
+    + ~Destroyer()
+}
+
+class Player <<entity>>{
+    - name : std::string
+    - points : int
+    - board : Board*
+
+    + Player()
+    + ~Player()
+
+    + getName() : std::string
+    + getPoints() : int
+    + setName(name : std::string) : void
+    + setPoints(points : int) : void
+    + shoot() : virtual bool
+}
+
+class AI <<entity>> extends Player{
+    + AI()
+    + ~AI()
+}
+
+class Human <<entity>> extends Player{
+    + Human()
+    + ~Human()
+}
+
+class Game <<control>>{
+    - states : std::stack<State*>
+    - player1 : Player*
+    - player2 : Player*
+
+    + Game()
+    + ~Game()
+}
+
+class Interface{
+
+}
+
+Board "1" --* "many" Cell : contains
+Ship -r-> "1..5" Cell : knows
+Game "1" o-- "2" Player : aggregates
+Board "1" o-- "many" Ship : aggregates
+Player "1" o-- "1" Board : aggregates
+Game "1" o-l- "1" Interface : aggregates
+Interface "1" --> "2" Board : knows
+
+@enduml
