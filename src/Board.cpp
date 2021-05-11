@@ -94,9 +94,6 @@ bool Board::_positionIsValid(int posX, int posY){
         return 0;
     }
 }
-//métodos de place deveriam ser virtuais puros
-//implementação em cada tipagem de barco específica
-//Antigas implementações de posicionamento de barcos
 
 void Board::placeShips(){
 
