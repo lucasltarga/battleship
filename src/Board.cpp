@@ -9,10 +9,14 @@
 #define SIZE 10
 
 Board::Board() :
+    //cria um board de vector com tamanho e tipo
+    //o tipo é vector de ponteiros pra celulas e insere NULL em todas elas
+    //Se inserirmos Cell direto ele gera varios apontamentos para a MESMA celula
     board(SIZE, std::vector<Cell*>(SIZE, nullptr))
 {
     this->size = SIZE;
 
+    //para cada coordenada de board insere uma nova celula
     for(int i = 0; i < this->size; i++){
         for(int j = 0; j < this->size; j++){
             board[i][j] = new Cell();
@@ -29,7 +33,7 @@ Board::Board() :
 Board::~Board(){
 }
 
-std::vector<std::vector<Cell*>> Board::getBoard(){
+std::vector<std::vector<Cell*> > Board::getBoard(){
     return this->board;
 }
 
@@ -37,7 +41,7 @@ int Board::getSize(){
     return this->size;
 }
 
-void Board::setBoard(std::vector<std::vector<Cell*>> board){
+void Board::setBoard(std::vector<std::vector<Cell*> > board){
     this->board = board;
 }
 
@@ -45,9 +49,11 @@ void Board::setSize(int size){
     this->size = size;
 }
 
+//Ilhas tem SIZE = 1
 void Board::createIsles(int q){
     int c = 0;
     int pos[2];
+
 
     while(c < q){
         _randPosition(pos);
@@ -66,6 +72,7 @@ void Board::_randPosition(int* pos){
     }while(!this->_positionIsValid(pos[0], pos[1]));
 }
 
+
 bool Board::_positionIsValid(int posX, int posY){
     if(board[posX][posY] != nullptr){
         if(board[posX][posY]->getValue() == '~'){
@@ -79,31 +86,9 @@ bool Board::_positionIsValid(int posX, int posY){
         return 0;
     }
 }
-
-//TODO
-void Board::placeCarrier(){
-
-}
-
-//TODO
-void Board::placeCruiser(){
-
-}
-
-//TODO
-void Board::placeSubmarine(){
-
-}
-
-//TODO
-void Board::placeBattleship(){
-
-}
-
-//TODO
-void Board::placeDestroyer(){
-
-}
+//métodos de place deveriam ser virtuais puros
+//implementação em cada tipagem de barco expecífica
+//Antigas implementações de posicionamento de barcos
 
 void Board::placeShips(){
     placeCarrier();
