@@ -5,6 +5,6 @@ class Submarine : public Ship{
 public:
     Submarine();
     ~Submarine();
-    void placeSubmarine();
+    void place();
 
 };

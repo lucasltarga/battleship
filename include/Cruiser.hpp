@@ -5,6 +5,6 @@ class Cruiser : public Ship{
 public: 
     Cruiser();
     ~Cruiser();
-    void placeCruiser();
+    void place();
 
 };

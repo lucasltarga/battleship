@@ -1,0 +1,41 @@
+#include "../include/Ship.hpp"
+
+Ship::Ship(){
+    this->size = 0;
+    this->type = '0';
+    this->orientation = 0;
+}
+
+Ship::~Ship(){
+
+}
+
+int Ship::getSize(){
+    return this->size;
+}
+
+std::vector<Cell*> Ship::getParts(){
+    return this->parts;
+}
+
+char Ship::getType(){
+    return this->type;
+}
+
+bool Ship::getOrientation(){
+    return this->orientation;
+}
+void Ship::setSize(int size){
+    this->size = size;
+}
+void Ship::setParts(std::vector<Cell*> parts){
+    this->parts = parts;
+}
+
+void Ship::setType(char type){
+    this->type = type;
+}
+
+void Ship::setOrientation(bool orientation){
+    this->orientation = orientation;
+}

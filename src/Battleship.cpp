@@ -1,12 +1,13 @@
 #include "../include/Battleship.hpp"
 
-//TODO
 Battleship::Battleship(){
-    
+    this->setSize(5);
 }
+
 Battleship::~Battleship(){
 
 }
-void Battleship::placeBattleship(){
+
+void Battleship::place(){
 
 }

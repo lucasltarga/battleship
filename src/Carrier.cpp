@@ -1,12 +1,12 @@
 #include "../include/Carrier.hpp"
 
-//TODO
 Carrier::Carrier(){
-
+    this->setSize(10);
 }
+
 Carrier::~Carrier(){
     
 }
-void Carrier::placeCarrier(){
+void Carrier::place(){
 
 }

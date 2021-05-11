@@ -1,12 +1,12 @@
 #include "../include/Cruiser.hpp"
 
-//TODO
 Cruiser::Cruiser(){
-
+    this->setSize(2);
 }
+
 Cruiser::~Cruiser(){
 
 }
-void Cruiser::placeCruiser(){
 
+void Cruiser::place(){
 }
