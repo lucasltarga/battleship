@@ -5,8 +5,8 @@ Submarine::Submarine(){
 
 }
 Submarine::~Submarine(){
-    
+
 }
-void Submarine::placeSubmarine(){
+void placeShip(){
 
 }

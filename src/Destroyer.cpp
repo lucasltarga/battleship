@@ -5,8 +5,8 @@ Destroyer::Destroyer(){
 
 }
 Destroyer::~Destroyer(){
-    
+
 }
-void Destroyer::placeDestroyer(){
+void placeShip(){
 
 }

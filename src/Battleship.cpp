@@ -7,6 +7,6 @@ Battleship::Battleship(){
 Battleship::~Battleship(){
 
 }
-void Battleship::placeBattleship(){
+void Battleship::placeShip(){
 
 }

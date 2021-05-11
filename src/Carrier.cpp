@@ -5,8 +5,8 @@ Carrier::Carrier(){
 
 }
 Carrier::~Carrier(){
-    
+
 }
-void Carrier::placeCarrier(){
+void placeShip(){
 
 }
