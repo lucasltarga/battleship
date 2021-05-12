@@ -27,10 +27,17 @@ Board::Board() :
     this->ships.push_back(new Submarine());
     this->ships.push_back(new Destroyer()); 
     this->ships.push_back(new Battleship()); 
-    this->ships.push_back(new Carrier());   
+    this->ships.push_back(new Carrier());
+
+    this->createIsles(4);
 }
 
 Board::~Board(){
+    for(int i = 0; i < this->size; i++){
+        for(int j = 0; j < this->size; j++){
+            delete(board[i][j]);
+        }
+    }
 }
 
 std::vector<std::vector<Cell*> > Board::getBoard(){
@@ -59,6 +66,7 @@ void Board::createIsles(int q){
         _randPosition(pos);
         board[pos[0]][pos[1]]->setValue(ISLE);
         isles.push_back(board[pos[0]][pos[1]]);
+        c++;
     }
 }
 
@@ -86,16 +94,9 @@ bool Board::_positionIsValid(int posX, int posY){
         return 0;
     }
 }
-//métodos de place deveriam ser virtuais puros
-//implementação em cada tipagem de barco expecífica
-//Antigas implementações de posicionamento de barcos
 
 void Board::placeShips(){
-    placeCarrier();
-    placeBattleship();
-    placeDestroyer();
-    placeSubmarine();
-    placeCruiser();
+
 }
 
 void Board::draw(){

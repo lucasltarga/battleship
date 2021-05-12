@@ -3,5 +3,7 @@
 
 class Battleship : public Ship{
 public: 
-    virtual void placeShip();
+    Battleship();
+    ~Battleship();
+    void place();
 };

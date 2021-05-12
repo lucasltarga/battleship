@@ -1,12 +1,13 @@
 #include "../include/Submarine.hpp"
 
-//TODO
 Submarine::Submarine(){
-
+    this->setSize(3);
 }
+
 Submarine::~Submarine(){
 
 }
-void placeShip(){
+
+void Submarine::place(){
 
 }

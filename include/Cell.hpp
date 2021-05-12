@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 #define WATER '~'
 #define CRUISER '1'
@@ -10,22 +11,22 @@
 #define ISLE '^'
 
 class Cell{
-    private:
-        bool visible;
-        char value;
-        int posX;
-        int posY;
+private:
+    bool visible;
+    char value;
+    int posX;
+    int posY;
 
-    public:
-        Cell();
-        ~Cell();
+public:
+    Cell();
+    ~Cell();
 
-        bool isVisible();
-        char getValue();
-        int getPosX();
-        int getPosY();
-        void setVisible(bool visible);
-        void setValue(char value);
-        void setPos(int posX, int posY);
-        void draw();
+    bool isVisible();
+    char getValue();
+    int getPosX();
+    int getPosY();
+    void setVisible(bool visible);
+    void setValue(char value);
+    void setPos(int posX, int posY);
+    void draw();
 };

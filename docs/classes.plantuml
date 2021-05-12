@@ -39,11 +39,6 @@ class Board <<entity>>{
 
     + createIsles(q : int) : void
     + _positionIsValid(posX : int, posY : int) : bool
-    + placeCarrier() : void
-    + placeCruiser() : void
-    + placeSubmarine() : void
-    + placeBattleship() : void
-    + placeDestroyer() : void
     + placeShips() : void
     + draw() : void
 }
@@ -65,31 +60,37 @@ class Ship <<entity>>{
     + setParts(parts : std::vector<Cell*>) : void
     + setType(type : char) : void
     + setOrientation(orientation : bool) : void
+    + place() : virtual void
 }
 
 class Carrier <<entity>> extends Ship{
     + Carrier()
     + ~Carrier()
+    + place() : void
 }
 
 class Cruiser <<entity>> extends Ship{
     + Cruiser()
     + ~Cruiser()
+    + place() : void
 }
 
 class Submarine <<entity>> extends Ship{
     + Submarine()
     + ~Submarine()
+    + place() : void
 }
 
 class Battleship <<entity>> extends Ship{
     + Battleship()
     + ~Battleship()
+    + place() : void
 }
 
 class Destroyer <<entity>> extends Ship{
     + Destroyer()
     + ~Destroyer()
+    + place() : void
 }
 
 class Player <<entity>>{

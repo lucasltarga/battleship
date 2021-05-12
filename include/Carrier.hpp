@@ -5,6 +5,6 @@ class Carrier : public Ship{
 public:
     Carrier();
     ~Carrier();
-    virtual void placeShip();
+    void place();
        
 };
