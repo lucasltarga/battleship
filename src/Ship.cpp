@@ -1,5 +1,6 @@
 #include "../include/Ship.hpp"
-
+#include "../include/Board.hpp"
+//Padrão da orientação = 1 Horizontal, 2 Vertical;
 Ship::Ship(){
     this->size = 0;
     this->type = '0';
@@ -38,4 +39,28 @@ void Ship::setType(char type){
 
 void Ship::setOrientation(bool orientation){
     this->orientation = orientation;
+}
+int randOrientation(){
+    //Retorna 1 ou 2
+    // 1 horizontal
+    // 2 vertical
+    srand((unsigned)time(0));
+    return (rand()%3)+1;
+}
+int randPosition(){
+    srand((unsigned)time(0));
+    return (rand()%10);
+}
+bool positionIsValid(int posX, int posY, Board board){
+    if(board.getBoard()[posX][posY]->getValue() != NULL){
+        if(board.getBoard()[posX][posY]->getValue() == '~'){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    else{
+        return 0;
+    }
 }

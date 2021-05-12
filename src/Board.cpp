@@ -80,20 +80,20 @@ void Board::_randPosition(int* pos){
     }while(!this->_positionIsValid(pos[0], pos[1]));
 }
 
-
-bool Board::_positionIsValid(int posX, int posY){
-    if(board[posX][posY] != nullptr){
-        if(board[posX][posY]->getValue() == '~'){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-    else{
-        return 0;
-    }
-}
+//Método movido para a classe ship
+// bool Board::_positionIsValid(int posX, int posY){
+//     if(board[posX][posY] != nullptr){
+//         if(board[posX][posY]->getValue() == '~'){
+//             return 1;
+//         }
+//         else{
+//             return 0;
+//         }
+//     }
+//     else{
+//         return 0;
+//     }
+// }
 
 void Board::placeShips(){
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-
+#include "../include/Board.hpp"
 #include "Cell.hpp"
 
 class Ship{
@@ -22,5 +22,8 @@ public:
     void setParts(std::vector<Cell*> parts);
     void setType(char type);
     void setOrientation(bool orientation);
-    virtual void place() = 0;
+    virtual void place(Board board) = 0;
+    int randOrientation();
+    int randPosition();
+    bool positionIsValid(int posX, int posY, Board board);
 };

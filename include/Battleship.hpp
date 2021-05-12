@@ -5,5 +5,5 @@ class Battleship : public Ship{
 public: 
     Battleship();
     ~Battleship();
-    void place();
+    void place(Board board);
 };
