@@ -20,8 +20,8 @@ public:
     void setSize(int size);
 
     void createIsles(int q);
-    void _randPosition(int* pos);
-    bool _positionIsValid(int posX, int posY);
+    // void _randPosition(int* pos);
+    // bool _positionIsValid(int posX, int posY);
     void placeShips();
     void draw();
 };

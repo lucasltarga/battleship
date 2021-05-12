@@ -2,7 +2,7 @@
 
 Carrier::Carrier(){
     this->setSize(10);
-    this->setType('5');
+    this->setType(CARRIER);
 }
 
 Carrier::~Carrier(){
@@ -66,4 +66,9 @@ void Carrier::place(Board board){
 
     }while (!flag);
     //quando sair do Do While o vector de coordenadas vai ter coordenadas válidas para inserir o ship por completo
+    if (coords1[0] == 1){
+        setOrientation(true);
+    }else{
+        setOrientation(false);
+    }
 }

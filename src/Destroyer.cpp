@@ -2,7 +2,7 @@
 
 Destroyer::Destroyer(){
     this->setSize(4);
-    this->setType('3');
+    this->setType(DESTROYER);
 }
 
 Destroyer::~Destroyer(){
@@ -51,4 +51,9 @@ void Destroyer::place(Board board){
 
     }while (!flag);
     //quando sair do Do While o vector de coordenadas vai ter coordenadas válidas para inserir o ship por completo
+    if (coords[0] == 1){
+        setOrientation(true);
+    }else{
+        setOrientation(false);
+    }
 }

@@ -38,6 +38,8 @@ void Ship::setType(char type){
 }
 
 void Ship::setOrientation(bool orientation){
+    //TRUE = HORIZONTAL
+    //FALSE = VERTICAL
     this->orientation = orientation;
 }
 int randOrientation(){
