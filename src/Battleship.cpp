@@ -15,7 +15,7 @@ void Battleship::place(Board board){
     //coordenadas[2] = posy
     bool flag = false;
     int i = 0;
-    std::vector<int> coords (11, NULL);
+    std::vector<int> coords (11, 0);
     do {
         coords[0] = randOrientation();
         //pega uma coordenada aleatória para ser a posição inicial
@@ -43,7 +43,7 @@ void Battleship::place(Board board){
             coords[10] = (coords[2] -4);
 
         }
-        for (i=0; i < 5; i+2){
+        for (i=0; i < 5; i+=2){
             
             if (positionIsValid(coords[i+1], coords[i+2], board)){
                 flag = true;
@@ -60,5 +60,8 @@ void Battleship::place(Board board){
         setOrientation(true);
     }else{
         setOrientation(false);
+    }
+    for (i=0; i<9; i+=2){
+        board.placeParts(coords[i+1],coords[i+2], BATTLESHIP);
     }
 }

@@ -14,7 +14,7 @@ void Destroyer::place(Board board){
     //coordenadas[2] = posy
     bool flag = false;
     int i = 0;
-    std::vector<int> coords (9, NULL);
+    std::vector<int> coords (9, 0);
     do {
         coords[0] = randOrientation();
         //pega uma coordenada aleatória para ser a posição inicial
@@ -38,7 +38,7 @@ void Destroyer::place(Board board){
             coords[8] = (coords[2] - 3);
 
         }
-        for (i=0; i < 4; i+2){
+        for (i=0; i < 4; i+=2){
             
             if (positionIsValid(coords[i+1], coords[i+2], board)){
                 flag = true;
@@ -55,5 +55,8 @@ void Destroyer::place(Board board){
         setOrientation(true);
     }else{
         setOrientation(false);
+    }
+    for (i=0; i<7; i+=2){
+        board.placeParts(coords[i+1],coords[i+2], DESTROYER);
     }
 }

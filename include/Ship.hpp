@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
-#include "../include/Board.hpp"
+
 #include "Cell.hpp"
 
+class Board;
 class Ship{
 private:
     int size;

@@ -14,8 +14,8 @@ void Carrier::place(Board board){
     //coordenadas[2] = posy
     bool flag = false;
     int i = 0;
-    std::vector<int> coords1 (11, NULL);
-    std::vector<int> coords2 (11, NULL);
+    std::vector<int> coords1 (11, 0);
+    std::vector<int> coords2 (11, 0);
 
     do {
         coords1[0] = randOrientation();
@@ -47,7 +47,7 @@ void Carrier::place(Board board){
             }
 
         }
-        for (i=0; i < 5; i+2){
+        for (i=0; i < 5; i+=2){
             
             if (positionIsValid(coords1[i+1], coords1[i+2], board)){
                 flag = true;
@@ -70,5 +70,10 @@ void Carrier::place(Board board){
         setOrientation(true);
     }else{
         setOrientation(false);
+    }
+    for (i=0; i<9; i+=2){
+        board.placeParts(coords1[i+1],coords1[i+2], CARRIER);
+        board.placeParts(coords2[i+1],coords2[i+2], CARRIER);
+        
     }
 }

@@ -1,5 +1,5 @@
 #include "../include/Ship.hpp"
-#include "../include/Board.hpp"
+
 //Padrão da orientação = 1 Horizontal, 2 Vertical;
 Ship::Ship(){
     this->size = 0;

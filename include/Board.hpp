@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Cell.hpp"
-#include "Ship.hpp"
+#include "../include/Ship.hpp"
 
 class Board{
 private:
@@ -18,10 +18,10 @@ public:
     int getSize();
     void setBoard(std::vector<std::vector<Cell*> > board);
     void setSize(int size);
-
     void createIsles(int q);
-    // void _randPosition(int* pos);
-    // bool _positionIsValid(int posX, int posY);
+    void _randPosition(int* pos);
+    bool _positionIsValid(int posX, int posY);
     void placeShips();
     void draw();
+    void placeParts(int posX, int posY, char type);
 };

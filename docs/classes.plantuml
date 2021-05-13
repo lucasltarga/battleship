@@ -129,6 +129,17 @@ class Game <<control>>{
     + ~Game()
 }
 
+
+class ControlDao{
+    - ranking : 
+    - jogoSalvo : 
+
+    + setJogo() : void
+    + getJogo() : Game
+    + atualizaRanking() : void
+    + getRanking() : void
+
+}
 class Interface{
 
 }
@@ -140,5 +151,6 @@ Board "1" o-- "many" Ship : aggregates
 Player "1" o-- "1" Board : aggregates
 Game "1" o-l- "1" Interface : aggregates
 Interface "1" --> "2" Board : knows
+Game "1" o-r- ControlDao : aggregates
 
 @enduml

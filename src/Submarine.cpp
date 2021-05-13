@@ -15,7 +15,7 @@ void Submarine::place(Board board){
     //coordenadas[2] = posy
     bool flag = false;
     int i = 0;
-    std::vector<int> coords (7, NULL);
+    std::vector<int> coords (7, 0);
     do {
         coords[0] = randOrientation();
         //pega uma coordenada aleatória para ser a posição inicial
@@ -35,7 +35,7 @@ void Submarine::place(Board board){
             coords[6] = (coords[2] - 2);
 
         }
-        for (i=0; i < 3; i+2){
+        for (i=0; i < 3; i+=2){
             //board.getBoard()[coordenadas[i+1]][coordenadas[i+2]]->getValue() == '~')
             if (positionIsValid(coords[i+1], coords[i+2], board)){
                 flag = true;
@@ -53,4 +53,9 @@ void Submarine::place(Board board){
     }else{
         setOrientation(false);
     }
+    for (i=0; i<5; i+=2){
+        board.placeParts(coords[i+1],coords[i+2], SUBMARINE);
+    }
+
+
 }

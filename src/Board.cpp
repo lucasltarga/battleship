@@ -69,6 +69,9 @@ void Board::createIsles(int q){
         c++;
     }
 }
+void Board::placeParts(int posX, int posY, char type){
+    board[posX][posY]->setValue(type);
+}
 
 void Board::_randPosition(int* pos){
     srand(time(NULL));
