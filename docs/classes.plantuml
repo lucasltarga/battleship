@@ -59,40 +59,37 @@ class Ship <<entity>>{
     + setParts(parts : std::vector<Cell*>) : void
     + setType(type : char) : void
     + setOrientation(orientation : bool) : void
-    + place(board : Board) : virtual void
-    + randOrientation() : int 
-    + randPosition() : int
-    + positionIsValid(posX : int , posY : int , board : board) : bool
+
 }
 
 class Carrier <<entity>> extends Ship{
     + Carrier()
     + ~Carrier()
-    + place(board : Board) : void
+    
 }
 
 class Cruiser <<entity>> extends Ship{
     + Cruiser()
     + ~Cruiser()
-    + place(board : Board) : void
+
 }
 
 class Submarine <<entity>> extends Ship{
     + Submarine()
     + ~Submarine()
-    + place(board : Board) : void
+    
 }
 
 class Battleship <<entity>> extends Ship{
     + Battleship()
     + ~Battleship()
-    + place(board : Board) : void
+   
 }
 
 class Destroyer <<entity>> extends Ship{
     + Destroyer()
     + ~Destroyer()
-    + place(board : Board) : void
+    
 }
 
 class Player <<entity>>{
@@ -143,6 +140,7 @@ class ControlDao{
 class Interface{
 
 }
+
 
 Board "1" --* "many" Cell : contains
 Ship -r-> "1..5" Cell : knows

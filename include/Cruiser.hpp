@@ -6,6 +6,6 @@ class Cruiser : public Ship{
 public: 
     Cruiser();
     ~Cruiser();
-    void place(Board board);
+    
 
 };

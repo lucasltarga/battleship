@@ -6,6 +6,6 @@ class Destroyer : public Ship{
 public: 
     Destroyer();
     ~Destroyer();
-    void place(Board board);
+    
 
 };
