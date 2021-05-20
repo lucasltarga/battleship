@@ -4,6 +4,7 @@
 #include "Cell.hpp"
 
 class Board;
+
 class Ship{
 private:
     int size;
@@ -23,8 +24,4 @@ public:
     void setParts(std::vector<Cell*> parts);
     void setType(char type);
     void setOrientation(bool orientation);
-    
-    int randOrientation();
-    int randPosition();
-    bool positionIsValid(int posX, int posY, Board board);
 };
