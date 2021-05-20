@@ -9,7 +9,7 @@ class Cell <<entity>>{
 
     - posX : int
     - posY : int
-    ..
+
     + Cell()
     + ~Cell()
 
@@ -23,6 +23,36 @@ class Cell <<entity>>{
     + draw() : void
 }
 
+class BoardBuilder <<control>> {
+    - board : Board*
+    - auxPos[2] : int
+
+    + BoardBuilder()
+    + ~BoardBuilder()
+    + reset() : void
+    + setCruiser(q : int) : void
+    + setSubmarine(q : int) : void
+    + setDestroyer(q : int) : void
+    + setBattleship(q : int) : void
+    + setCarrier(q: int) : void
+    + setIsles(q : int) : void
+
+    + randPosition(pos : int*) : int* 
+    + isBoundary(posX : int, posY : int) : bool
+    + checkEmptyCells(q : int, posX : int, posY : int, direction : int) : bool
+    + getResult() : Board*
+}
+
+enum CardinalDirections <<enumeration>>{
+    NORTH = 0
+    SOUTH
+    WEST
+    EAST
+}
+hide CardinalDirections methods
+note left
+    This is an <i>enum class</i>
+end note
 class Board <<entity>>{
     - board : std::vector<std::vector<Cell*>>
     - ships : std::vector<Ship*>
@@ -37,8 +67,6 @@ class Board <<entity>>{
     + setBoard(board : std::vector<std::vector<Cell*>>) : void
     + setSize(size : int) : void
 
-    + createIsles(q : int) : void
-    + placeShips() : void
     + draw() : void
 }
 
@@ -62,12 +90,6 @@ class Ship <<entity>>{
 
 }
 
-class Carrier <<entity>> extends Ship{
-    + Carrier()
-    + ~Carrier()
-    
-}
-
 class Cruiser <<entity>> extends Ship{
     + Cruiser()
     + ~Cruiser()
@@ -80,15 +102,22 @@ class Submarine <<entity>> extends Ship{
     
 }
 
+
+class Destroyer <<entity>> extends Ship{
+    + Destroyer()
+    + ~Destroyer()
+    
+}
+
 class Battleship <<entity>> extends Ship{
     + Battleship()
     + ~Battleship()
    
 }
 
-class Destroyer <<entity>> extends Ship{
-    + Destroyer()
-    + ~Destroyer()
+class Carrier <<entity>> extends Ship{
+    + Carrier()
+    + ~Carrier()
     
 }
 
@@ -102,53 +131,232 @@ class Player <<entity>>{
 
     + getName() : std::string
     + getPoints() : int
+    + getBoard() : Board*
     + setName(name : std::string) : void
     + setPoints(points : int) : void
-    + shoot() : virtual bool
+    + setBoard(board : Board*) : void
+    + {abstract} getNextShoot() : virtual int*
+    + {abstract} shoot(pos : int*) : virtual bool
 }
 
 class AI <<entity>> extends Player{
+    - nextShoot[2] : int
+
     + AI()
     + ~AI()
+
+    + randomShoot() : void
+    + getNextShoot() : int*
+    + setNextShoot(nextShoot[2] : int) : void
+    + shoot(pos : int*) : bool
 }
 
 class Human <<entity>> extends Player{
     + Human()
     + ~Human()
+
+    + getInput() : std::String
+    + isInputValid() : bool
+    + getNextShoot() : int*
+    + shoot(pos : int*) : bool
 }
 
 class Game <<control>>{
-    - states : std::stack<State*>
     - player1 : Player*
     - player2 : Player*
-
+    - currentState : int
+    --
     + Game()
     + ~Game()
+    .. Game modes ..
+    + setSingleplayer() : void
+    + setMultiplayer() : void
+    .. Game states ..
+    + MainMenu() : void
+    + GameLoop() : void
+    + GameOver() : void
+    + Ranking() : void
+    + changeState(newState : int) : void
+    .. Board types ..
+    + createDefaultBoard() : void
+    + createIslesBoard() : void
+    + createSingleShipBoard() : void
+    ..
+    + init() : void
+    + saveGame() : void
+    + loadGame() : void
+}
+
+enum States <<enumeration>>{
+    MainMenu = 0
+    GameOver
+    Ranking
+}
+hide States methods
+note right
+    This is an <i>enum class</i>
+end note
+
+class GameSaver <<interface>>{
+    .. Save ..
+    + saveGame() : void
+    + saveCell() : void
+    + saveBoard() : void
+    + saveShip() : void
+    + savePlayer() : void
+    + saveRanking() : void
+    .. Load ..
+    + loadGame() : void
+    + loadCell() : void
+    + loadBoard() : void
+    + loadShip() : void
+    + loadPlayer() : void
+    + loadRanking() : void
+}
+class UI <<Interface>> {
+    + UI()
+    + ~UI()
+
+    + {static} draw() : static void
+    + {static} clear() : static void
+    + drawTopUI() : void
+    + drawBottomUI() : void
+    + drawMainMenu() : void
+    + drawRanking() : void
 }
 
 
-class ControlDao{
-    - ranking : 
-    - jogoSalvo : 
+package "Data Access Layer" {
+    class CellDAO <<interface>>{
+        + CellDAO()
+        + ~CellDAO()
 
-    + setJogo() : void
-    + getJogo() : Game
-    + atualizaRanking() : void
-    + getRanking() : void
+        + {abstract} save() : virtual void
+        + {abstract} load() : virtual void
+    }
 
+    class CellDAOTxt extends CellDAO{
+        + CellDAOTxt()
+        + ~CellDAOTxt()
+
+        + save() : void
+        + load() : void
+    }
+
+    class CellDAOBin extends CellDAO{
+        + CellDAOBin()
+        + ~CellDAOBin()
+
+        + save() : void
+        + load() : void
+    }
+
+    class BoardDAO <<interface>>{
+        + BoardDAO()
+        + ~BoardDAO()
+
+        + {abstract} save() : virtual void
+        + {abstract} load() : virtual void
+    }
+
+    class BoardDAOTxt extends BoardDAO{
+        + BoardDAOTxt()
+        + ~BoardDAOTxt()
+
+        + save() : void
+        + load() : void
+    }
+
+    class BoardDAOBin extends BoardDAO{
+        + BoardDAOBin()
+        + ~BoardDAOBin()
+        
+        + save() : void
+        + load() : void
+    }
+
+    class ShipDAO <<interface>>{
+        + ShipDAO()
+        + ~ShipDAO()
+
+        + {abstract} save() : virtual void
+        + {abstract} load() : virtual void
+    }
+
+    class ShipDAOTxt extends ShipDAO{
+        + ShipDAOTxt()
+        + ~ShipDAOTxt()
+
+        + save() : void
+        + load() : void
+    }
+
+    class ShipDAOBin extends ShipDAO{
+        + ShipDAOBin()
+        + ~ShipDAOBin()
+
+        + save() : void
+        + load() : void
+    }
+
+    class PlayerDAO <<interface>>{
+        + PlayerDAO()
+        + ~PlayerDAO()
+
+        + {abstract} save() : virtual void
+        + {abstract} load() : virtual void
+    }
+
+    class PlayerDAOTxt extends PlayerDAO{
+        + PlayerDAOTxt()
+        + ~PlayerDAOTxt()
+        + save() : void
+        + load() : void
+    }
+
+    class PlayerDAOBin extends PlayerDAO{
+        + PlayerDAOBin()
+        + ~PlayerDAOBin()
+        + save() : void
+        + load() : void
+    }
+
+    class RankingDAO <<interface>>{
+        + RankingDAO()
+        + ~RankingDAO()
+
+        + {abstract} save() : virtual void
+        + {abstract} load() : virtual void
+    }
+
+    class RankingDAOTxt extends RankingDAO{
+        + RankingDAOTxt()
+        + ~RankingDAOTxt()
+        
+        + save() : void
+        + load() : void
+    }
 }
-class Interface{
 
-}
+Game "1" o-- "2" Player : > aggregates
+Game "1" o-l- "1" UI : > aggregates
+Game "1" -r-> "1" GameSaver : > knows
+Game .. States
 
+Player "1" o-- "1" Board : > aggregates
 
-Board "1" --* "many" Cell : contains
-Ship -r-> "1..5" Cell : knows
-Game "1" o-- "2" Player : aggregates
-Board "1" o-- "many" Ship : aggregates
-Player "1" o-- "1" Board : aggregates
-Game "1" o-l- "1" Interface : aggregates
-Interface "1" --> "2" Board : knows
-Game "1" o-r- ControlDao : aggregates
+BoardBuilder "1" o-- "1" Board : > aggregates
+BoardBuilder .. CardinalDirections
+Board "1" *-- "many" Cell : > contains
+Board "1" o-- "many" Ship : > aggregates
 
+Ship "1" -r-> "many" Cell : > knows
+UI "1" --> "2" Board : > knows
+UI "1" --> "2" Player : > knows
+
+GameSaver --> CellDAO
+GameSaver --> BoardDAO
+GameSaver --> ShipDAO
+GameSaver --> PlayerDAO
+GameSaver --> RankingDAO
 @enduml
