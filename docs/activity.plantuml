@@ -1,0 +1,93 @@
+@startuml Activity
+start
+
+:Init Game;
+
+partition MainMenu {
+    :Main Menu;
+    note right
+        UI::drawMainMenu()
+    end note
+    if (Ranking) then (yes)
+        : Access Ranking;
+        : Show Ranking;
+        detach
+    else if (New game?) then (yes)
+        if(Which game mode?) then (Singleplayer)
+            :Create Player;
+            :Create AI;
+        else(Multiplayer)
+            :Create Player1;
+            :Create Player2;
+        endif
+    else (no)
+        : Load last saved game;
+    endif
+}
+
+: Player selects board type;
+: BoardBuilder creates Players' Boards;
+: BoardBuilder places Ships on the Boards;
+
+partition GameLoop {
+    while (running?) is (yes)
+        : UI draws;
+        : Player1 shoots;
+            if (Hit a ship?) then (yes)
+                : Ship part is destroyed;
+                : Player gets some points;
+                    if(Ship is fully destroyed?) then (yes)
+                        : Player gets more points;
+                    else (no)
+                    endif
+                if(Any ship parts left?) then (no)
+                    : Game Over;
+                    : Update Ranking;
+                    stop
+                else (yes)
+                endif
+            else if (Hit an isle?) then (yes)
+                : Player loses some points;
+            else (no)
+            endif
+        : Player2 shoots;
+            if (Player2 is Human?) then (yes)
+                : Does what Player1 did;
+            else (no, it's a beautiful and beep-booping AI)
+                if (Hit something in the last shoot?) then (no)
+                    : Random shoot;
+                else (yes)
+                    : Calculated shoot;
+                endif
+                if(Hit a ship?) then (yes)
+                    : Ship part is destroyed;
+                    : Calculates and saves the next shoot;
+                    : AI gets some points;
+                    if(Ship is fully destroyed?) then (yes)
+                        : AI gets more points;
+                    else (no)
+                    endif
+                    if(Any ship parts left?) then (no)
+                        : Game Over;
+                        : Update Ranking;
+                        stop
+                    else (yes)
+                    endif
+                else (no)
+                endif
+            endif
+        if(Player wants to save the game yet?) then (yes)
+            : Create DAO;
+            : Player chooses output format (.txt or .bin);
+            : Game is saved;
+        else(no)
+        endif 
+        : UI clears;
+    endwhile (no)
+}
+
+partition GameOver {
+    stop
+}
+
+@enduml

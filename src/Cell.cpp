@@ -1,7 +1,7 @@
 #include "../include/Cell.hpp"
 
 Cell::Cell(){
-    this->visible = 0;
+    this->visible = 1;
     this->value = WATER;
 }
 
