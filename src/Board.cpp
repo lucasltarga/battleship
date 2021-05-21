@@ -36,12 +36,28 @@ std::vector<std::vector<Cell*> > Board::getBoard(){
     return this->board;
 }
 
+std::vector<Ship*> Board::getShips(){
+    return this->ships;
+}
+
+std::vector<Cell*> Board::getIsles(){
+    return this->isles;
+}
+
 int Board::getSize(){
     return this->size;
 }
 
 void Board::setBoard(std::vector<std::vector<Cell*> > board){
     this->board = board;
+}
+
+void Board::setShips(std::vector<Ship*> ships){
+    this->ships = ships;
+}
+
+void Board::setIsles(std::vector<Cell*> isles){
+    this->isles = isles;
 }
 
 void Board::setSize(int size){
