@@ -10,7 +10,7 @@ BoardBuilder::BoardBuilder(){
 }
 
 BoardBuilder::~BoardBuilder(){
-    delete this->board;
+
 }
 
 void BoardBuilder::reset(){
@@ -35,6 +35,7 @@ void BoardBuilder::setCruiser(int q){
         }
 
         placeParts(2, auxPos[0], auxPos[1], dir, ship);
+        this->board->getShips().push_back(ship);
     }   
 }
 
@@ -50,6 +51,7 @@ void BoardBuilder::setSubmarine(int q){
         }
 
         placeParts(3, auxPos[0], auxPos[1], dir, ship);
+        this->board->getShips().push_back(ship);
     }   
 }
 
@@ -65,6 +67,7 @@ void BoardBuilder::setDestroyer(int q){
         }
 
         placeParts(4, auxPos[0], auxPos[1], dir, ship);
+        this->board->getShips().push_back(ship);
     }   
 }
 
@@ -80,6 +83,7 @@ void BoardBuilder::setBattleship(int q){
         }
 
         placeParts(5, auxPos[0], auxPos[1], dir, ship);
+        this->board->getShips().push_back(ship);
     }       
 }
 
@@ -115,6 +119,7 @@ void BoardBuilder::setCarrier(int q){
             placeParts(5, auxPos[0], auxPos[1], dir, ship);
             placeParts(5, auxPos[0], auxPos[1]+1, dir, ship);
         }
+        this->board->getShips().push_back(ship);
     }
 }
 
@@ -183,6 +188,7 @@ bool BoardBuilder::checkEmptyCells(int q, int posX, int posY, int direction){
     }
     else
         return 0;
+    return 0;
 }
 
 void BoardBuilder::placeParts(int q, int posX, int posY, int direction, Ship* ship){
