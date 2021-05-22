@@ -132,7 +132,7 @@ class Player <<entity>>{
     - board : Board*
 
     + Player()
-    + ~Player()
+    + {abstract} ~Player() : virtual
 
     + getName() : std::string
     + getPoints() : int
@@ -140,36 +140,36 @@ class Player <<entity>>{
     + setName(name : std::string) : void
     + setPoints(points : int) : void
     + setBoard(board : Board*) : void
-    + {abstract} getNextShoot() : virtual int*
-    + {abstract} shoot(pos : int*) : virtual bool
+    + {abstract} shoot(board : Board*) : virtual bool
 }
 
 class AI <<entity>> extends Player{
-    - nextShoot[2] : int
+    - nextShot[2] : int
+    - nextShotDirection : int
 
     + AI()
     + ~AI()
 
     + randomShoot() : void
-    + getNextShoot() : int*
-    + setNextShoot(nextShoot[2] : int) : void
-    + shoot(pos : int*) : bool
+    + getNextShot() : int*
+    + isBoundary(posX : int, posY : int) : bool
+    + shoot(board : Board*) : bool
 }
 
 class Human <<entity>> extends Player{
     + Human()
     + ~Human()
 
-    + getInput() : std::String
-    + isInputValid() : bool
-    + getNextShoot() : int*
-    + shoot(pos : int*) : bool
+    + getInput() : std::string
+    + isInputValid(input : std::string) : bool
+    + shoot(board : Board*) : bool
 }
 
 class Game <<control>>{
     - player1 : Player*
     - player2 : Player*
     - currentState : int
+    - hAI : bool
     --
     + Game()
     + ~Game()
@@ -187,16 +187,21 @@ class Game <<control>>{
     + createIslesBoard() : void
     + createSingleShipBoard() : void
     ..
-    + init() : void
+    + run() : void
+    + initGame() : void
+    + turn(player : Player*, board : Board*) : void
+    + hasAI() : bool
     + saveGame() : void
     + loadGame() : void
 }
 
 enum States <<enumeration>>{
     MainMenu = 0
+    GameLoop
     GameOver
     Ranking
 }
+
 hide States methods
 note right
     This is an <i>enum class</i>
@@ -222,12 +227,12 @@ class UI <<Interface>> {
     + UI()
     + ~UI()
 
-    + {static} draw() : static void
     + {static} clear() : static void
-    + drawTopUI() : void
-    + drawBottomUI() : void
-    + drawMainMenu() : void
-    + drawRanking() : void
+    + {static} drawTopUI(player : Player*) : void
+    + {static} drawBottomUI(player : Player*) : void
+    + {static} drawMainMenu() : void
+    + {static} drawRanking() : void
+    + {static} getInput() : static std::string
 }
 
 
