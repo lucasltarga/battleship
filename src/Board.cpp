@@ -1,10 +1,4 @@
 #include "../include/Board.hpp"
-#include "../include/Cruiser.hpp"
-#include "../include/Submarine.hpp"
-#include "../include/Destroyer.hpp"
-#include "../include/Battleship.hpp"
-#include "../include/Carrier.hpp"
-#include <random>
 
 #define SIZE 10
 
@@ -65,22 +59,27 @@ void Board::setSize(int size){
 }
 
 void Board::draw(){
-    std::cout << "   ";
-    for(int i = 0; i < this->size; i++){
-        std::cout << char(i+65) << " ";
-    }
-    std::cout << std::endl;
-    for(int i = 0; i < this->size; i++){
-        if(i < 9){
-            std::cout << " " << i+1 << " ";
-        }
-        else{
-            std::cout << i+1 << " ";
-        }
-        for(int j = 0; j < this->size; j++){
-            board[i][j]->draw();
-            std::cout << " ";
+    if(!this->board.empty()){
+        std::cout << "   ";
+        for(int i = 0; i < this->size; i++){
+            std::cout << char(i+65) << " ";
         }
         std::cout << std::endl;
+        for(int i = 0; i < this->size; i++){
+            std::cout << " " << i << " ";
+            for(int j = 0; j < this->size; j++){
+                if(board[i][j]){
+                    board[i][j]->draw();
+                }
+                else{
+                    std::cout << "(Board::draw) ERROR: Cannot draw cell." << std::endl;
+                }
+                std::cout << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+    else{
+        std::cout << "(Board::draw) ERROR: Cannot draw board." << std::endl;
     }
 }
