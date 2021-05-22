@@ -1,7 +1,13 @@
 #pragma once
 
 #include "Cell.hpp"
-#include "../include/Ship.hpp"
+#include "Ship.hpp"
+#include "Cruiser.hpp"
+#include "Submarine.hpp"
+#include "Destroyer.hpp"
+#include "Battleship.hpp"
+#include "Carrier.hpp"
+#include <random>
 
 class Board{
 private:
