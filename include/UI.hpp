@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include "Player.hpp"
+#include "Ranking.hpp"
 
 class UI{
 public:

@@ -36,7 +36,17 @@ void UI::drawMainMenu(){
 }
 
 void UI::drawRanking(){
-
+    std::vector<Player*> players = Ranking::getPlayers();
+    std::cout << "=== Ranking ===" << std::endl;
+    if(players.empty()){
+        std::cout << "Ranking is not ready yet :(" << std::endl;
+    }
+    else{
+        for(int i = 0; i < players.size(); i++){
+            std::cout << i+1 << " - " << players.at(i)->getName() << ":" <<
+                players.at(i)->getPoints() << "points" << std::endl;
+        }
+    }
 }
 
 std::string UI::getInput(){
