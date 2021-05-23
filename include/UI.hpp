@@ -13,6 +13,6 @@ public:
     static void drawTopUI(Player* player);
     static void drawBottomUI(Player* player);
     static void drawMainMenu();
-    static void drawRanking();
+    static void drawRanking(Ranking* ranking);
     static std::string getInput();
 };

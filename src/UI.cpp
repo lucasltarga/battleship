@@ -35,16 +35,16 @@ void UI::drawMainMenu(){
     std::cout << "(4) - Ranking" << std::endl;
 }
 
-void UI::drawRanking(){
-    std::vector<Player*> players = Ranking::getPlayers();
+void UI::drawRanking(Ranking* ranking){
+    std::vector<PosRanking*> r = ranking->getRanking();
     std::cout << "=== Ranking ===" << std::endl;
-    if(players.empty()){
+    if(r.empty()){
         std::cout << "Ranking is not ready yet :(" << std::endl;
     }
     else{
-        for(int i = 0; i < players.size(); i++){
-            std::cout << i+1 << " - " << players.at(i)->getName() << ":" <<
-                players.at(i)->getPoints() << "points" << std::endl;
+        for(int i = 0; i < (int)r.size(); i++){
+            std::cout << i+1 << " - " << r.at(i)->getName() << ":" <<
+                r.at(i)->getPoints() << "points" << std::endl;
         }
     }
 }
