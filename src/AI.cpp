@@ -2,7 +2,6 @@
 
 AI::AI(){
     srand(time(nullptr));
-    this->randomShoot();
 }
 
 AI::~AI(){
