@@ -7,6 +7,7 @@ public:
     ~Human();
 
     std::string getInput();
-    bool isInputValid(std::string input);
+    bool isInputValid(int * pos);
     bool shoot(Board* board);
+    void convertCoordinates(std::string input, int * pos);
 };
