@@ -1,4 +1,5 @@
 #include "../include/Human.hpp"
+#include <sstream>
 
 Human::Human(){
 }
@@ -11,9 +12,37 @@ std::string Human::getInput(){
     getline(std::cin, input);
     return input;
 }
+void Human::convertCoordinates(std::string input, int * pos){
+    int posAux, tam;
+    char aux;
+    std::string posix , posiy;
+    int position[2] = {0,0};
 
-bool Human::isInputValid(std::string input){
-    //TODO
+    //converting the x coordinate
+    posAux = input.find(" ", 0);
+    posix = input.substr(0, posAux);
+    std::stringstream ss;
+    ss << posix;
+    ss >> position[0];
+
+    //converting the y coordinate
+    tam = posAux+1;
+    posAux = input.find(" ", posAux+1);
+    posiy = input.substr(tam, posAux-tam);
+    aux = posiy[0];
+    position[1] = ((int)aux - 65);
+    pos[0] = position[0];
+    pos[1] = position[1];
+
+}
+
+bool Human::isInputValid(int *pos){
+    if (pos[0] >= 0 && pos[0] < 10 && pos[1] >= 0 && pos[1] < 10){
+        return 1;
+    }else{
+        std::cout << "Please, try a valid coordnate" << std::endl;
+        return 0;
+    }
     return 0;
 }
 
@@ -24,8 +53,19 @@ bool Human::isInputValid(std::string input){
  * Returns 1 if hits something.
 */
 bool Human::shoot(Board* board){
-    //TODO: need to get user input
-    int pos[2] = {5,5}; //temp
+    //get user input, convert the coordnates and test if is valid and visible.
+    bool valid = false;
+    int pos[2] = {0,0};
+    do{
+        std::cout << "Enter the two coordinates with space between them" << std::endl;
+        convertCoordinates(getInput(), pos);
+        if (isInputValid(pos)){
+            Cell* Celula = board->getBoard()[pos[0]][pos[1]];
+            valid = Celula->isVisible();
+        }
+    }while(valid);
+    
+    
     
     //condition to avoid segfault
     if(board && board->getBoard()[pos[0]][pos[1]]){

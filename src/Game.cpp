@@ -48,16 +48,16 @@ void Game::GameLoop(){
     this->initGame();
 
     //testing
-    UI::drawTopUI(this->player1);
-    UI::drawTopUI(this->player2);
+    //UI::drawTopUI(this->player1);
+    //UI::drawTopUI(this->player2);
 
-    // while(this->currentState != static_cast<int>(States::GameOver)){ 
-    //     //Player1 turn
-    //     this->turn(this->player1, this->player2->getBoard());
+    while(this->currentState != static_cast<int>(States::GameOver)){ 
+        //Player1 turn
+        this->turn(this->player1, this->player2->getBoard());
 
-    //     //Player2 turn
-    //     this->turn(this->player2, this->player1->getBoard());
-    // }
+        //Player2 turn
+        this->turn(this->player2, this->player1->getBoard());
+    }
 }
 
 void Game::GameOver(){
