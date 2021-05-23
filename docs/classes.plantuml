@@ -144,15 +144,14 @@ class Player <<entity>>{
 }
 
 class AI <<entity>> extends Player{
-    - nextShot[2] : int
-    - nextShotDirection : int
+    - nextShots : std::stack<Cell*>
 
     + AI()
     + ~AI()
 
     + randomShoot() : void
-    + getNextShot() : int*
-    + isBoundary(posX : int, posY : int) : bool
+    + getNextShot() : Cell*
+    + updateNextShots(cell : Cell*) : void
     + shoot(board : Board*) : bool
 }
 
