@@ -8,13 +8,13 @@ AI::~AI(){
 
 }
 
-void AI::randomShoot(){
+void AI::randomShoot(Board* board){
     int pos[2];
     Cell* cell;
     do{
         pos[0] = rand()%BOARDSIZE;
         pos[1] = rand()%BOARDSIZE;
-        cell = this->getBoard()->getBoard()[pos[0]][pos[1]];
+        cell = board->getBoard()[pos[0]][pos[1]];
     }while(cell->isVisible());
     this->nextShots.push(cell);
 }
@@ -29,8 +29,7 @@ Cell* AI::getNextShot(){
  * Checks each direction and pushes non-visible
  * cells into nextShots stack
 */
-void AI::updateNextShots(Cell* cell){
-    Board* board = this->getBoard();
+void AI::updateNextShots(Cell* cell, Board* board){
     int x = cell->getPosX();
     int y = cell->getPosY();
 
@@ -50,7 +49,7 @@ void AI::updateNextShots(Cell* cell){
 
 bool AI::shoot(Board* board){
     if(nextShots.empty()){
-        randomShoot();
+        randomShoot(board);
     }
     Cell* cell = this->getNextShot();
     cell->setVisible(true);
@@ -68,7 +67,7 @@ bool AI::shoot(Board* board){
         }
         else{
             //add adj cells to nextshots stack
-            updateNextShots(cell);
+            updateNextShots(cell, board);
 
             std::vector<Ship*> ships = board->getShips();
 
