@@ -22,6 +22,15 @@ class Cell <<entity>>{
     + setPos(posX : int, posY : int) : void
     + draw() : void
 }
+class Ranking {
+    -players : static std::vector<players*>
+
+    + Ranking()
+    + ~Ranking()
+
+    + getPlayers() : static std::vector<Player*>
+    + updateRanking(player : Player*) : static void 
+}
 
 class BoardBuilder <<control>> {
     - board : Board*
@@ -38,6 +47,7 @@ class BoardBuilder <<control>> {
     + setIsles(q : int) : void
 
     + randPosition(pos : int*) : int* 
+    + randDirection(): int
     + isBoundary(posX : int, posY : int) : bool
     + checkEmptyCells(q : int, posX : int, posY : int, direction : int) : bool
     + placeParts(q : int, posX : int, posY : int, direction : int, ship : Ship*) : void
@@ -162,6 +172,7 @@ class Human <<entity>> extends Player{
     + getInput() : std::string
     + isInputValid(input : std::string) : bool
     + shoot(board : Board*) : bool
+    + convertCoordinates(input : std::string, pos : int*)
 }
 
 class Game <<control>>{
@@ -370,6 +381,7 @@ Board "1" o-- "many" Ship : > aggregates
 Ship "1" -r-> "many" Cell : > knows
 UI "1" --> "2" Board : > knows
 UI "1" --> "2" Player : > knows
+UI "1" --> "1" Ranking : > knows
 
 GameSaver --> CellDAO
 GameSaver --> BoardDAO
