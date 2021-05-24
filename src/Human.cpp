@@ -61,9 +61,9 @@ bool Human::shoot(Board* board){
         convertCoordinates(getInput(), pos);
         if (isInputValid(pos)){
             Cell* Celula = board->getBoard()[pos[0]][pos[1]];
-            valid = Celula->isVisible();
+            valid = !Celula->isVisible();
         }
-    }while(valid);
+    }while(!valid);
     
     
     
