@@ -42,3 +42,10 @@ void Ship::setOrientation(bool orientation){
     //FALSE = VERTICAL
     this->orientation = orientation;
 }
+
+ Cell* Ship::createPart(int x, int y, char value){
+     this->parts.push_back(new Cell());
+     this->parts.back()->setPosX(x);
+     this->parts.back()->setPosY(y);
+     this->parts.back()->setValue(value);
+ }

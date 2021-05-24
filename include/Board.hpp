@@ -28,5 +28,6 @@ public:
     void setShips(std::vector<Ship*> ships);
     void setIsles(std::vector<Cell*> isles);
     void setSize(int size);
+    Ship* createShip(char type);
     void draw();
 };

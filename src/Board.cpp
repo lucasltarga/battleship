@@ -58,6 +58,37 @@ void Board::setSize(int size){
     this->size = size;
 }
 
+
+//Add new ship to ships vector
+Ship* Board::createShip(char type){
+    switch (type)
+    {
+    case CRUISER:
+        this->ships.push_back(new Cruiser());
+        return this->ships.back();
+        break;
+    case SUBMARINE:
+        this->ships.push_back(new Submarine());
+        return this->ships.back();
+        break;
+    case DESTROYER:
+        this->ships.push_back(new Destroyer());
+        return this->ships.back();
+        break;
+    case BATTLESHIP:
+        this->ships.push_back(new Battleship());
+        return this->ships.back();
+        break;
+    case CARRIER:
+        this->ships.push_back(new Carrier());
+        return this->ships.back();
+        break;    
+    default:
+        return new Ship();
+        break;
+    }
+}
+
 void Board::draw(){
     if(!this->board.empty()){
         std::cout << "   ";

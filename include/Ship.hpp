@@ -24,4 +24,5 @@ public:
     void setParts(std::vector<Cell*> parts);
     void setType(char type);
     void setOrientation(bool orientation);
+    Cell* createPart(int x, int y, char value);
 };

@@ -27,6 +27,7 @@ public:
     int getPosY();
     void setVisible(bool visible);
     void setValue(char value);
-    void setPos(int posX, int posY);
+    void setPosX(int posX);
+    void setPosY(int posY);
     void draw();
 };
