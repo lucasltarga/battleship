@@ -28,14 +28,13 @@ void BoardBuilder::setCruiser(int q){
         int dir = randDirection();
         randPosition(auxPos);
 
-        Ship* ship = new Cruiser();
+        Ship* ship = this->board->createShip(CRUISER);
 
         while(!checkEmptyCells(2, auxPos[0], auxPos[1], dir)){
             randPosition(auxPos);
         }
 
         placeParts(2, auxPos[0], auxPos[1], dir, ship);
-        this->board->getShips().push_back(ship);
     }   
 }
 
@@ -44,14 +43,13 @@ void BoardBuilder::setSubmarine(int q){
         int dir = randDirection();
         randPosition(auxPos);
 
-        Ship* ship = new Submarine();
+        Ship* ship = this->board->createShip(SUBMARINE);
 
         while(!checkEmptyCells(3, auxPos[0], auxPos[1], dir)){
             randPosition(auxPos);
         }
 
         placeParts(3, auxPos[0], auxPos[1], dir, ship);
-        this->board->getShips().push_back(ship);
     }   
 }
 
@@ -60,14 +58,13 @@ void BoardBuilder::setDestroyer(int q){
         int dir = randDirection();
         randPosition(auxPos);
 
-        Ship* ship = new Destroyer();
+        Ship* ship = this->board->createShip(DESTROYER);
 
         while(!checkEmptyCells(4, auxPos[0], auxPos[1], dir)){
             randPosition(auxPos);
         }
 
         placeParts(4, auxPos[0], auxPos[1], dir, ship);
-        this->board->getShips().push_back(ship);
     }   
 }
 
@@ -76,14 +73,13 @@ void BoardBuilder::setBattleship(int q){
         int dir = randDirection();
         randPosition(auxPos);
 
-        Ship* ship = new Battleship();
+        Ship* ship = this->board->createShip(BATTLESHIP);
 
         while(!checkEmptyCells(5, auxPos[0], auxPos[1], dir)){
             randPosition(auxPos);
         }
 
         placeParts(5, auxPos[0], auxPos[1], dir, ship);
-        this->board->getShips().push_back(ship);
     }       
 }
 
@@ -94,7 +90,7 @@ void BoardBuilder::setCarrier(int q){
         int dir = randDirection();
         randPosition(auxPos);
 
-        Ship* ship = new Carrier();
+        Ship* ship = this->board->createShip(CARRIER);
 
         if(dir == static_cast<int>(CardinalDirections::NORTH)
             || dir == static_cast<int>(CardinalDirections::SOUTH)){
@@ -119,7 +115,6 @@ void BoardBuilder::setCarrier(int q){
             placeParts(5, auxPos[0], auxPos[1], dir, ship);
             placeParts(5, auxPos[0], auxPos[1]+1, dir, ship);
         }
-        this->board->getShips().push_back(ship);
     }
 }
 
@@ -195,29 +190,41 @@ void BoardBuilder::placeParts(int q, int posX, int posY, int direction, Ship* sh
     if(direction == static_cast<int>(CardinalDirections::NORTH)){
         for(int i = 0; i < q; i++){
             Cell* cell = this->board->getBoard()[posX][posY-i];
-            cell->setValue(ship->getType());
-            ship->getParts().push_back(cell);
+            int x = cell->getPosX();
+            int y = cell->getPosY();
+            char value = cell->getValue();
+            cell->setValue(ship->getType());      
+            ship->getParts().push_back(ship->createPart(x, y, value));
         }
     }
     else if(direction == static_cast<int>(CardinalDirections::SOUTH)){
         for(int i = 0; i < q; i++){
             Cell* cell = this->board->getBoard()[posX][posY+i];
-            cell->setValue(ship->getType());
-            ship->getParts().push_back(cell);            
+            int x = cell->getPosX();
+            int y = cell->getPosY();
+            char value = cell->getValue();
+            cell->setValue(ship->getType());      
+            ship->getParts().push_back(ship->createPart(x, y, value));          
         }
     }
     else if(direction == static_cast<int>(CardinalDirections::WEST)){
         for(int i = 0; i < q; i++){
             Cell* cell = this->board->getBoard()[posX-i][posY];
-            cell->setValue(ship->getType());
-            ship->getParts().push_back(cell);
+            int x = cell->getPosX();
+            int y = cell->getPosY();
+            char value = cell->getValue();
+            cell->setValue(ship->getType());      
+            ship->getParts().push_back(ship->createPart(x, y, value));
         }
     }
     else if(direction == static_cast<int>(CardinalDirections::EAST)){
         for(int i = 0; i < q; i++){
             Cell* cell = this->board->getBoard()[posX+i][posY];
-            cell->setValue(ship->getType());
-            ship->getParts().push_back(cell);
+            int x = cell->getPosX();
+            int y = cell->getPosY();
+            char value = cell->getValue();
+            cell->setValue(ship->getType());      
+            ship->getParts().push_back(ship->createPart(x, y, value));
         }    
     }
 }

@@ -32,9 +32,12 @@ void Cell::setValue(char value){
     this->value = value;
 }
 
-void Cell::setPos(int posX, int posY){
+void Cell::setPosX(int posX){
     this->posX = posX;
-    this->posY = posY;
+}
+
+void Cell::setPosY(int posY){
+     this->posY = posY;
 }
 
 void Cell::draw(){

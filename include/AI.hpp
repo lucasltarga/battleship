@@ -11,8 +11,8 @@ public:
     AI();
     ~AI();
 
-    void randomShoot();
+    void randomShoot(Board* board);
     Cell* getNextShot();
-    void updateNextShots(Cell* cell);
+    void updateNextShots(Cell* cell, Board* board);
     bool shoot(Board* board);
 };

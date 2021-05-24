@@ -61,11 +61,13 @@ void Game::GameLoop(){
 }
 
 void Game::GameOver(){
+    GameSaver::saveRanking();
     //UI
 }
 
-void Game::Ranking(){
-    UI::drawRanking();
+void Game::RankingState(){
+    GameSaver::loadRanking();
+    UI::drawRanking(this->ranking);
 }
 
 void Game::changeState(int newState){
@@ -129,6 +131,7 @@ void Game::createSingleShipBoard(){
 void Game::run(){
     this->currentState = static_cast<int>(States::MainMenu);
     this->hAI = true;
+    //this->ranking = 
 
     while(this->currentState != -1){
         if(this->currentState == static_cast<int>(States::MainMenu)){
@@ -141,7 +144,7 @@ void Game::run(){
             this->GameOver();
         }
         if(this->currentState == static_cast<int>(States::Ranking)){
-            this->Ranking();
+            this->RankingState();
         }
     }
 }

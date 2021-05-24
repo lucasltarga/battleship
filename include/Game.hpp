@@ -3,6 +3,8 @@
 #include "UI.hpp"
 #include "Human.hpp"
 #include "AI.hpp"
+#include "GameSaver.hpp"
+#include "Ranking.hpp"
 
 enum class States{
     MainMenu = 0,
@@ -17,6 +19,7 @@ private:
     Player* player2;
     int currentState;
     bool hAI;
+    Ranking* ranking;
 
 public:
     Game();
@@ -27,7 +30,7 @@ public:
     void MainMenu();
     void GameLoop();
     void GameOver();
-    void Ranking();
+    void RankingState();
     void changeState(int newState);
     void createDefaultBoard();
     void createIslesBoard();

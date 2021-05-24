@@ -8,17 +8,21 @@ Ranking::~Ranking(){
 
 }
 
-std::vector<Player*> Ranking::getPlayers(){
-    return players;
+std::vector<PosRanking*> Ranking::getRanking(){
+    return this->ranking;
 }
 
-void Ranking::updateRanking(Player* player){
-    for(int i; i < players.size(); i++){
-        if(players.at(i)->getPoints() <= player->getPoints()){
-            players.insert(players.begin()+i, player);
+void Ranking::updateRanking(std::string name, int points){
+    for(int i; i < (int)ranking.size(); i++){
+        if(ranking.at(i)->getPoints() <= points){
+            ranking.insert(ranking.begin()+i, new PosRanking(name, points));
         }
     }
-    if(players.size() >= 5){
-        players.pop_back();
+    if(ranking.size() >= 5){
+        ranking.pop_back();
     }
+}
+
+void Ranking::setRanking(std::vector<PosRanking*> ranking){
+    this->ranking = ranking;
 }

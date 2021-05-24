@@ -1,14 +1,16 @@
 #pragma once
-#include "Player.hpp"
+#include <vector>
+#include "PosRanking.hpp"
 
 class Ranking{
 private:
-    static std::vector<Player*> players;
+    std::vector<PosRanking*> ranking;
 
 public:
     Ranking();
     ~Ranking();
 
-    static std::vector<Player*> getPlayers();
-    static void updateRanking(Player* player);
+    std::vector<PosRanking*> getRanking();
+    void updateRanking(std::string name, int points);
+    void setRanking(std::vector<PosRanking*> anking);
 };
