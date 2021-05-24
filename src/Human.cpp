@@ -90,6 +90,7 @@ bool Human::shoot(Board* board){
          * If ship is fully destroyed, player earns bonus points.
         */
         else if(hitCell->getValue() != WATER){
+            this->setPoints(this->getPoints()+1);
             std::vector<Ship*> ships = board->getShips();
 
             //checks each ship

@@ -28,9 +28,11 @@ class Ranking {
     + Ranking()
     + ~Ranking()
 
-    + getPlayers() : static std::vector<Player*>
-    + updateRanking(player : Player*) : static void 
+    + getRanking() : std::vector<PosRanking*> 
+    + updateRanking(name : std::string, points : int)
+    + setRanking(ranking : std::vector<PosRanking*>) : void
 }
+
 
 class BoardBuilder <<control>> {
     - board : Board*
@@ -81,6 +83,8 @@ class Board <<entity>>{
     + setShips(ships : std::vector<Ship*>) : void
     + setIsles(isles : std::vector<Cell*>) : void
     + setSize(size : int) : void
+    + createShip(type : char) : Ship* 
+    
 
     + draw() : void
 }
@@ -102,6 +106,7 @@ class Ship <<entity>>{
     + setParts(parts : std::vector<Cell*>) : void
     + setType(type : char) : void
     + setOrientation(orientation : bool) : void
+    + createPar(x : int, y : int, value : char);
 
 }
 

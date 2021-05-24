@@ -12,5 +12,5 @@ public:
 
     std::vector<PosRanking*> getRanking();
     void updateRanking(std::string name, int points);
-    void setRanking(std::vector<PosRanking*> anking);
+    void setRanking(std::vector<PosRanking*> ranking);
 };

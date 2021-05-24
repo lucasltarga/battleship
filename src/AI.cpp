@@ -66,6 +66,7 @@ bool AI::shoot(Board* board){
             return 1;
         }
         else{
+            this->setPoints(this->getPoints()+1);
             //add adj cells to nextshots stack
             updateNextShots(cell, board);
 
